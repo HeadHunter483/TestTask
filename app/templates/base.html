@@ -1,0 +1,58 @@
+
+
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-4.2.1.min.css' %}" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'js/check_box.js' %}"></script>
+
+
+    <link href="{% static 'bootstrap/css/bootstrap-3.3.0.min.css' %}" rel="stylesheet" id="bootstrap-css">
+<script src="{% static 'bootstrap/js/bootstrap-3.3.0.min.js' %}"></script>
+
+  </head>
+  <body>
+
+ <nav class="navbar  navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'index' %}">CRUD Таблица</a>
+
+
+
+    <form class="form-inline my-2 my-lg-0" method="POST">
+        {% csrf_token %}
+      <input class="form-control mr-sm-2 " placeholder="Создать запись"  name="item" >
+      <button class="btn btn-primary" type="submit">Создать</button>
+    </form>
+     <a class="nav-link" href="{% url 'delete_chacked_items' %}"><button type="button" class="btn btn-danger">Удалить выделенные</button></a>
+
+</nav>
+  <div class="container">
+      {% block content %}
+      {% endblock %}
+  </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'bootstrap/js/bootstrap-4.2.1.min.js' %}" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+   <script type="text/javascript">
+        $(document).ready(function(){
+            {% for item in all_items %}
+                {% if item.completed %}
+                    var checkboxid = "#check"+{{item.id}}
+                    $(checkboxid).prop('checked', true);
+                {% endif %}
+            {% endfor %}
+        });
+    </script>
+  </body>
+</html>

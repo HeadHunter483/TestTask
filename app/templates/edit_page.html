@@ -1,0 +1,54 @@
+
+
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-4.2.1.min.css' %}" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href="{% static 'bootstrap/css/bootstrap-3.3.0.min.css' %}" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'js/edit.js' %}"></script>
+
+  </head>
+  <body>
+
+ <nav class="navbar  navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'index' %}">CRUD Таблица</a>
+</nav>
+
+ <div class="center_div">
+    <form class="form-inline my-2 my-lg-0"  action="{% url 'post_new' item.id %}"  method="POST">
+        {% csrf_token %}
+      <input class="form-control mr-sm-2 is-valid" id = "item" placeholder="Редактировать"  name="item" value = '{{item.item}}' required>
+        <div class="form-group">
+
+        <select class="form-control" id="exampleFormControlSelect1" name="completed">
+                {% if item.completed %}
+                <option value="1" selected="selected">Завершено</option>
+                <option value="0">Не завершено</option>
+                {% else %}
+                <option value="1">Завершено</option>
+                <option value="0" selected="selected">Не завершено</option>
+                {% endif %}
+
+    </select>
+  </div>
+        <button class="btn btn-primary" id = "send"  type="submit">Cохранить</button>
+    </form>
+     </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'bootstrap/js/bootstrap-4.2.1.min.js' %}"  crossorigin="anonymous"></script>
+  </body>
+</html>

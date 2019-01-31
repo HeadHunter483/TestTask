@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissable" role="alert">
+    <button class="close" data-dismiss = "alert">
+        <small><sup>x</sup></small>
+    </button>
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+{% if all_items %}
+ <table id="mytable" class="table table-bordred table-striped">
+
+<thead>
+
+<th>Выделить</th>
+<th>Название</th>
+<th>Редактировать</th>
+<th>Удалить</th>
+</thead>
+
+{% for item in all_items %}
+
+
+    <tr>
+        <td>
+
+                <input type="checkbox" id="check{{ item.id }}" class="task-checkbox">
+
+        </td>
+        {% if item.completed %}
+        <td class="striker secondary" id = "class_{{ item.id }}">
+            {{item.item}}
+        </td>
+        {% else %}
+        <td id = "class_{{ item.id }}">
+            {{item.item}}
+        </td>
+          {%endif%}
+        <td><a href="{% url 'edit' item.id %}"><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></a></td>
+        <td><a href="{% url 'delete' item.id %}"><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></a></td>
+
+
+{% endfor %}
+</table>
+{% endif %}
+{% endblock %}
+

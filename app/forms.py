@@ -1,0 +1,15 @@
+from django import forms
+from .models import List
+
+
+class ListForm(forms.ModelForm):
+    class Meta:
+        model = List
+        fields = ["item"]
+
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = List
+        fields = ["item", "completed"]
